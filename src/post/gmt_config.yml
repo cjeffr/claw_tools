@@ -1,0 +1,5 @@
+xy_plot:
+  MAP_FRAM_PEN: black
+  FONT_ANNOT_PRIMARY: 14p,Helvetica-Narrow
+  FONT_LABEL: 14p,black
+  MAP_GRID_PEN_PRIMARY: thinner,grey
