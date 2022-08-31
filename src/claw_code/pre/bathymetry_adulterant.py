@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from clawpack.geoclaw import topotools
-from clawpack.amrclaw import regiontools
+from clawpack.amrclaw import region_tools
 
 def find_island_points(topo_data):
     island_x = []
@@ -48,9 +48,28 @@ def create_island_mask(topo_data, points_indices):
         mask_array[row, col] = 1
         
     masked_data = np.ma.masked_array(topo_data.Z, np.logical_not(mask_array))
+    np.savez('/home/catherinej/BarrierBreach/data/masked_island.npz', data=masked_data, mask=masked_data.mask)
     return masked_data
 
 
+def calc_no_island_values(topo_data, island_idxs):
+    replace_mask = []
+    for idx in island_idxs:
+        first = idx[0]
+        last = idx[1]
+        avg = (topo_data.Z[first[0] - 1,first[2]] + topo_data.Z[last[0] + 1,first[2]])/2
+        replace_mask.append([first[0], last[0], first[2], avg])
+        
+    return replace_mask
+
+
+def remove_island(topo_data, island_idxs):
+    replace_data = calc_no_island_values(topo_data, island_idxs)
+    for zdata in replace_data:
+        topo_data.Z[zdata[0]:zdata[1], zdata[2]] = zdata[3]
+    return topo_data
+
+    
 def find_inlet(topo_data):
     inlet_y = []
     points = []
