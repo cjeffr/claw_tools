@@ -142,20 +142,25 @@ def find_inlet(topo_data):
     return search_bathymetry(topo_data, lon_search=True) # or false, or whatever it is for this case
 
 
-def create_static_breach(topo_data, breach_loc, depth):
+def create_static_breach(topo_data, breach_loc):
     for idx in range(len(breach_loc)):
-        w = df.loc[idx]['West']
-        e = df.loc[idx]['East']
-        n = df.loc[idx]['North']
-        s = df.loc[idx]['South']
-        
+        w = breach_loc.loc[idx]['West']
+        e = breach_loc.loc[idx]['East']
+        n = breach_loc.loc[idx]['North']
+        s = breach_loc.loc[idx]['South']
+        depth = breach_loc.loc[idx]['Depth']
+        # w = breach_loc[0]
+        # e = breach_loc[1]
+        # s = breach_loc[2]
+        # n = breach_loc[3]
+        # depth = breach_loc[4]
         for i, lon in enumerate(topo_data.x):
             if (lon > w) and (lon < e):
                 for j, lat in enumerate(topo_data.y):
                     if (lat > s) and (lat < n):
                         if topo_data.Z[j, i] >= 0:
                             topo_data.Z[j,i] = depth
-    return topo_data.Z
+    return topo_data
 
 
 def close_inlet(topo_data, inlet_loc, name, save_path):
