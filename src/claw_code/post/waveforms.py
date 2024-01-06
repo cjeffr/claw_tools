@@ -135,7 +135,7 @@ def calc_distance(lat1, lat2, lon1, lon2):
 
 
 def gauges_in_bay(x,y):
-    bay_coords = [-72.875, -72.67, 40.73, 40.788]
+    bay_coords = [-72.875655, -72.6617104, 40.730813, 40.791133]
     v1 = (bay_coords[1] - bay_coords[0], bay_coords[3] - bay_coords[2])
     v2 = (x - bay_coords[0],  y - bay_coords[2])
     xp = v1[0]*v2[1] - v1[1]*v2[0]

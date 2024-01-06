@@ -143,6 +143,9 @@ def find_inlet(topo_data):
 
 
 def create_static_breach(topo_data, breach_loc):
+    x = topo_data.x.copy()
+    y = topo_data.y.copy()
+    Z = topo_data.Z.copy()
     for idx in range(len(breach_loc)):
         w = breach_loc.loc[idx]['West']
         e = breach_loc.loc[idx]['East']
@@ -154,13 +157,17 @@ def create_static_breach(topo_data, breach_loc):
         # s = breach_loc[2]
         # n = breach_loc[3]
         # depth = breach_loc[4]
-        for i, lon in enumerate(topo_data.x):
+        for i, lon in enumerate(x):
             if (lon > w) and (lon < e):
-                for j, lat in enumerate(topo_data.y):
+                for j, lat in enumerate(y):
                     if (lat > s) and (lat < n):
-                        if topo_data.Z[j, i] >= 0:
-                            topo_data.Z[j,i] = depth
-    return topo_data
+                        if Z[j, i] >= 0:
+                            Z[j,i] = depth
+    new_topo = topotools.Topography()
+    new_topo.x = x
+    new_topo.y = y
+    new_topo.Z = Z
+    return new_topo
 
 
 def close_inlet(topo_data, inlet_loc, name, save_path):

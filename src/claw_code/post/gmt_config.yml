@@ -1,20 +1,21 @@
 xy_plot:
   MAP_FRAME_PEN: black
-  FONT_ANNOT_PRIMARY: 14p,Helvetica-Narrow
-  FONT_LABEL: 14p,black
+  FONT_ANNOT_PRIMARY: 14p,Times-Roman
+  FONT_LABEL: 14p,Times-Roman,black
   MAP_GRID_PEN_PRIMARY: thinner,grey
   
 xy_region: [-5, 5, -1.5, 1.5]
   
 region_map:
     MAP_FRAME_PEN: black
-    FONT_ANNOT_PRIMARY: 20p,Helvetica-Narrow
-    FONT_LABEL: 16p,black
+    MAP_FRAME_WIDTH: 8p
+    FONT_ANNOT_PRIMARY: 20p,Times-Roman
+    FONT_LABEL: 16p,Times-Roman,black
     MAP_GRID_PEN_PRIMARY: thinner,grey
     FORMAT_GEO_MAP: ddd.xx
     
 moriches_map:
-    region: [-72.88, -72.65, 40.72, 40.829]
+    region: [-72.87995372, -72.65004631, 40.72, 40.829954]
     basemap_frame: ['ya.02f.01+l"Latitude"', 
                     'xa.05f.025+l"Longitude"']
     colorbar_position: 'JBC+o2.05c/-1.85c+w15/.75h+mc'
